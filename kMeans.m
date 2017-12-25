@@ -34,10 +34,10 @@ iterations = 0;
 % init stopping criterion
 stop = false; % if stopping criterion met, it changes to true
 
-while stop==false
+while stop == false
     
     % for each data point 
-    for idxP=1:numP
+    for idxP = 1:numP
         % init distance array dist
         dist = zeros(1,k);
         % compute distance to each centroid
@@ -54,7 +54,7 @@ while stop==false
     % init centroid array centr
     centr = zeros(dimP,k);
     % for every cluster compute new centroid
-    for idxC=1:k
+    for idxC = 1:k
         % find the points in cluster number idxC and compute row-wise mean
         centr(:,idxC) = mean(P(:,cluster==idxC),2);
     end

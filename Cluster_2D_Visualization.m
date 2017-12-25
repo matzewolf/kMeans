@@ -19,7 +19,7 @@ fprintf('k-Means will run with %d clusters and %d data points.\n',k,numP);
 % with row 1/2 (x/y coordiante) ranging in [minX,maxX]/[minY,maxY]
 xP = xMax * rand(1,numP);
 yP = yMax * rand(1,numP);
-points = [xP ; yP];
+points = [xP; yP];
 
 
 %% run kMeans.m and measure/print performance
