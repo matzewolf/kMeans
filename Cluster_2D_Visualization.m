@@ -1,5 +1,5 @@
-% This script uses the k-means function on an example with randomly
-% created data points in 2D and visualizes its result.
+% This script uses the k-means function on an example with randomly created
+% data points in 2D and visualaizes its result.
 
 close all; clear; clc;
 
@@ -15,7 +15,7 @@ fprintf('k-Means will run with %d clusters and %d data points.\n',k,numP);
 
 %% Create random data points
 
-% create a random matrix of size 2 x numP 
+% create a random matrix of size 2-by-numP 
 % with row 1/2 (x/y coordiante) ranging in [minX,maxX]/[minY,maxY]
 xP = xMax * rand(1,numP);
 yP = yMax * rand(1,numP);
@@ -25,7 +25,7 @@ points = [xP ; yP];
 %% run kMeans.m and measure/print performance
 
 tic;
-cluster = kMeans( k, points );
+[cluster, centr] = kMeans(k, points); % my k-means
 myPerform = toc;
 fprintf('Computation time for kMeans.m: %d seconds.\n', myPerform);
 
@@ -33,8 +33,9 @@ fprintf('Computation time for kMeans.m: %d seconds.\n', myPerform);
 %% run MATLAB's function kmeans(P,k) and measure/print performance
 
 tic;
-cluster_m = kmeans(points',k)';
+[cluster_mT, centr_m] = kmeans(points',k); % MATLAB's k-means
 matlabsPerform = toc;
+cluster_m = cluster_mT';
 fprintf('Computation time for MATLABs kmeans: %d seconds.\n', matlabsPerform);
 
 
@@ -51,6 +52,8 @@ figure('Name','Visualizations','units','normalized','outerposition',[0 0 1 1]);
 % visualize the clustering
 subplot(2,2,1);
 scatter(xP,yP,200,cluster,'.');
+hold on;
+scatter(centr(1,:),centr(2,:),'xk','LineWidth',1.5);
 axis([0 xMax 0 yMax]);
 daspect([1 1 1]);
 xlabel('x');
@@ -71,6 +74,8 @@ title('Histogram of the cluster points (own implementation)');
 % visualize MATLAB's clustering
 subplot(2,2,3);
 scatter(xP,yP,200,cluster_m,'.');
+hold on;
+scatter(centr_m(:,1),centr_m(:,2),'xk','LineWidth',1.5);
 axis([0 xMax 0 yMax]);
 daspect([1 1 1]);
 xlabel('x');
