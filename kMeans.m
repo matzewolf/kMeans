@@ -1,9 +1,11 @@
-function [ cluster ] = kMeans( k, P )
+function [ cluster, centr ] = kMeans( k, P )
+
 %kMeans Clusters data points into k clusters.
 %   Input args: k: number of clusters; 
 %   points: m-by-n matrix of n m-dimensional data points.
 %   Output args: cluster: 1-by-n array with values of 0,...,k-1
 %   representing in which cluster the corresponding point lies in
+%   centr: m-by-k matrix of the m-dimensional centroids of the k clusters
 
 
 numP = size(P,2); % number of points
